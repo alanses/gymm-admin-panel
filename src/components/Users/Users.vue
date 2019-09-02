@@ -1,8 +1,13 @@
 <template>
     <div>
-        <md-table v-model="users" :table-header-color="tableHeaderColor">
+        <md-table v-model="users"
+                  :table-header-color="tableHeaderColor"
+        >
             <md-table-row slot="md-table-row" slot-scope="{ item }">
                 <md-table-cell md-label="ID">{{ item.id }}</md-table-cell>
+                <md-table-cell md-label="Image">
+                    <div class="table-image" :style="getImage(item)"></div>
+                </md-table-cell>
                 <md-table-cell md-label="Name">{{ item.name }}</md-table-cell>
                 <md-table-cell md-label="Email">{{ item.email }}</md-table-cell>
                 <md-table-cell md-label="User type">{{ item.user_type }}</md-table-cell>
@@ -49,6 +54,15 @@ export default {
                     this.total = result.data.meta.total;
                     this.$emit('getCountUsers', this.total)
                 })
+        },
+
+        getImage(item) {
+            let photo = item.photo;
+            if(photo) {
+                return  {
+                    backgroundImage: 'url(' +item.photo +')'
+                }
+            }
         }
     }
 }
@@ -62,5 +76,17 @@ export default {
 
     .btn-view {
         background: #3d5afe !important;
+    }
+
+    .table-image {
+        min-width: 50px;
+        min-height: 50px;
+        border-radius: 25%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: 50%;
+        background-color: #ebebeb;
+        width: 50px;
+        height: 50px;
     }
 </style>
