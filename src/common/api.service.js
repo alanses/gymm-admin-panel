@@ -26,8 +26,8 @@ const ApiService = {
     });
   },
 
-  get(resource) {
-    return Vue.axios.get(`${resource}`);
+  get(resource, params) {
+    return Vue.axios.get(`${resource}`, {params});
   },
 
   getByParam(resource, id) {
@@ -56,8 +56,8 @@ export const AutificationService = {
 };
 
 export const UsersService = {
-  getListUsers(resource) {
-    return ApiService.get(resource);
+  getListUsers(resource, params) {
+    return ApiService.get(resource, params);
   },
   deleteUser(id){
     return ApiService.delete('admin/user', id);

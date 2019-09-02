@@ -1,8 +1,6 @@
 <template>
     <div>
-        <md-table v-model="users"
-                  :table-header-color="tableHeaderColor"
-        >
+        <md-table v-model="users" :table-header-color="tableHeaderColor">
             <md-table-row slot="md-table-row" slot-scope="{ item }">
                 <md-table-cell md-label="ID">{{ item.id }}</md-table-cell>
                 <md-table-cell md-label="Image">
@@ -13,10 +11,24 @@
                 <md-table-cell md-label="User type">{{ item.user_type }}</md-table-cell>
                 <md-table-cell md-label="Actions">
                     <md-button @click="deleteUser(item.id)" class="btn-delete">Delete</md-button>
-                    <md-button class="btn-view">View</md-button>
+                    <md-button class="btn-view" @click="viewUser(item.id)">View</md-button>
                 </md-table-cell>
             </md-table-row>
         </md-table>
+
+        <div class="pagination">
+            <b-pagination
+                    v-model="currentPage"
+                    :total-rows="total"
+                    aria-controls="my-table"
+                    :per-page="perPage"
+                    first-text="First"
+                    prev-text="Prev"
+                    next-text="Next"
+                    last-text="Last"
+                    @change="updatePagination"
+            ></b-pagination>
+        </div>
     </div>
 </template>
 
@@ -29,13 +41,20 @@ export default {
         return {
             users: [],
             tableHeaderColor: "",
-            total: 0
+            total: 0,
+            currentPage: 1,
+            perPage: 10,
         };
     },
     created() {
         this.getListUsers();
     },
     methods: {
+        updatePagination(page){
+            this.currentPage = page;
+            this.getListUsers();
+        },
+
         deleteUser(id) {
             this.deleteUserFromDatabase(id).then(() => {
                 const index = this.users.findIndex(user => user.id === id);
@@ -48,7 +67,7 @@ export default {
         },
 
         getListUsers() {
-            UsersService.getListUsers('admin/users')
+            UsersService.getListUsers('admin/users', {'page': this.currentPage})
                 .then((result) => {
                     this.users = result.data.data;
                     this.total = result.data.meta.total;
@@ -63,6 +82,12 @@ export default {
                     backgroundImage: 'url(' +item.photo +')'
                 }
             }
+        },
+
+        viewUser(userId) {
+            this.$router.push({
+                path: `/users/${userId}`
+            });
         }
     }
 }
@@ -76,6 +101,7 @@ export default {
 
     .btn-view {
         background: #3d5afe !important;
+        min-width: 100px;
     }
 
     .table-image {
@@ -88,5 +114,9 @@ export default {
         background-color: #ebebeb;
         width: 50px;
         height: 50px;
+    }
+
+    .pagination {
+        margin-top: 15px;
     }
 </style>

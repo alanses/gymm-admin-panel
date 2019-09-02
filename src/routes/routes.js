@@ -10,6 +10,7 @@ import Notifications from "@/pages/Notifications.vue";
 
 import LoginPage from "@/views/LoginPage.vue";
 import UsersPage from "@/views/UsersPage.vue";
+import UserPage from "@/views/UserPage";
 
 const routes = [
   {
@@ -60,6 +61,11 @@ const routes = [
         path: "/users",
         name: "users",
         component: UsersPage
+      },
+      {
+        name: "user",
+        path: "/users/:id",
+        component: UserPage
       }
     ]
   },

@@ -5,7 +5,6 @@
         <h4 class="title">Edit Profile</h4>
         <p class="category">Complete your profile</p>
       </md-card-header>
-
       <md-card-content>
         <div class="md-layout">
           <div class="md-layout-item md-small-size-100 md-size-33">
