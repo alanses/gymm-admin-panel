@@ -1,6 +1,10 @@
 <template>
     <div>
-        <user></user>
+        <div class="md-layout">
+            <div class="md-layout-item md-medium-size-100">
+                <user />
+            </div>
+        </div>
     </div>
 </template>
 

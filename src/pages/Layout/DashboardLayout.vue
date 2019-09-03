@@ -35,11 +35,18 @@
     </side-bar>
 
     <div class="main-panel">
-      <top-navbar></top-navbar>
 
-      <dashboard-content></dashboard-content>
+      <div class="d-flex justify-content-between flex-column min-vh-100">
+        <div>
+          <top-navbar></top-navbar>
 
-      <content-footer v-if="!$route.meta.hideFooter"></content-footer>
+          <dashboard-content></dashboard-content>
+        </div>
+
+        <content-footer v-if="!$route.meta.hideFooter"></content-footer>
+      </div>
+
+
     </div>
   </div>
 </template>

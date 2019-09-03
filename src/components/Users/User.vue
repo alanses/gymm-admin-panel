@@ -1,107 +1,109 @@
 <template>
-    <form>
-        <md-card>
-            <md-card-header :data-background-color="dataBackgroundColor">
-                <h4 class="title">Edit Profile</h4>
-                <p class="category">Complete your profile</p>
-            </md-card-header>
-            <md-card-content>
-                <div class="md-layout">
-                    <div class="md-layout-item md-small-size-100 md-size-33">
-                        <md-field>
-                            <label>Company (disabled)</label>
-                            <md-input v-model="disabled" disabled></md-input>
-                        </md-field>
+    <div class="user">
+        <div class="user-photo" v-if="this.user.photo">
+            <md-card>
+                <md-card-content class="image-form">
+                    <div class="md-layout">
                     </div>
-                    <div class="md-layout-item md-small-size-100 md-size-33">
-                        <md-field>
-                            <label>User Name</label>
-                            <md-input v-model="username" type="text"></md-input>
-                        </md-field>
-                    </div>
-                    <div class="md-layout-item md-small-size-100 md-size-33">
-                        <md-field>
-                            <label>Email Address</label>
-                            <md-input v-model="emailadress" type="email"></md-input>
-                        </md-field>
-                    </div>
-                    <div class="md-layout-item md-small-size-100 md-size-50">
-                        <md-field>
-                            <label>First Name</label>
-                            <md-input v-model="firstname" type="text"></md-input>
-                        </md-field>
-                    </div>
-                    <div class="md-layout-item md-small-size-100 md-size-50">
-                        <md-field>
-                            <label>Last Name</label>
-                            <md-input v-model="lastname" type="text"></md-input>
-                        </md-field>
-                    </div>
-                    <div class="md-layout-item md-small-size-100 md-size-100">
-                        <md-field>
-                            <label>Adress</label>
-                            <md-input v-model="address" type="text"></md-input>
-                        </md-field>
-                    </div>
-                    <div class="md-layout-item md-small-size-100 md-size-33">
-                        <md-field>
-                            <label>City</label>
-                            <md-input v-model="city" type="text"></md-input>
-                        </md-field>
-                    </div>
-                    <div class="md-layout-item md-small-size-100 md-size-33">
-                        <md-field>
-                            <label>Country</label>
-                            <md-input v-model="country" type="text"></md-input>
-                        </md-field>
-                    </div>
-                    <div class="md-layout-item md-small-size-100 md-size-33">
-                        <md-field>
-                            <label>Postal Code</label>
-                            <md-input v-model="code" type="number"></md-input>
-                        </md-field>
-                    </div>
-                    <div class="md-layout-item md-size-100">
-                        <md-field maxlength="5">
-                            <label>About Me</label>
-                            <md-textarea v-model="aboutme"></md-textarea>
-                        </md-field>
-                    </div>
-                    <div class="md-layout-item md-size-100 text-right">
-                        <md-button class="md-raised md-success">Update Profile</md-button>
-                    </div>
-                </div>
-            </md-card-content>
-        </md-card>
-    </form>
+                </md-card-content>
+            </md-card>
+        </div>
+        <div class="user-info">
+            <form>
+                <md-card>
+                    <md-card-header data-background-color="green">
+                        <h4 class="title">User Profile</h4>
+                    </md-card-header>
+                    <md-card-content>
+                        <div class="md-layout">
+                            <div class="md-layout-item md-small-size-100 md-size-100">
+                                <md-field>
+                                    <label>Name</label>
+                                    <md-input v-model="user.name" type="text"></md-input>
+                                </md-field>
+                            </div>
+                            <div class="md-layout-item md-small-size-100 md-size-50">
+                                <md-field>
+                                    <label>Email</label>
+                                    <md-input v-model="user.email" type="text"></md-input>
+                                </md-field>
+                            </div>
+                            <div class="md-layout-item md-small-size-100 md-size-50">
+                                <md-field>
+                                    <label>Registered at date</label>
+                                    <md-input v-model="user.registered_at_date" type="text" disabled></md-input>
+                                </md-field>
+                            </div>
+                            <div class="md-layout-item md-small-size-100 md-size-50">
+                                <md-field>
+                                    <label>Registered at time</label>
+                                    <md-input v-model="user.registered_at_time" type="text" disabled></md-input>
+                                </md-field>
+                            </div>
+                            <div class="md-layout-item md-small-size-100 md-size-50">
+                                <md-field>
+                                    <label>User type</label>
+                                    <md-input v-model="user.user_type" type="text" disabled></md-input>
+                                </md-field>
+                            </div>
+                        </div>
+                    </md-card-content>
+                </md-card>
+            </form>
+        </div>
+    </div>
 </template>
 
 <script>
+    import {UsersService} from "@/common/api.service";
+
     export default {
         name: "User",
-        props: {
-            dataBackgroundColor: {
-                type: String,
-                default: ""
-            }
-        },
         data() {
             return {
-                username: null,
-                disabled: null,
-                emailadress: null,
-                lastname: null,
-                firstname: null,
-                address: null,
-                city: null,
-                country: null,
-                code: null,
-                aboutme: "Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo."
+                user: {},
             };
+        },
+        created() {
+            const id = this.$route.params.id;
+            this.getUserById(id).then((response) => {
+                this.user = response.data.data;
+            })
+        },
+
+        methods: {
+            getUserById(id) {
+                return UsersService.getUserById(id);
+            },
+            getImage() {
+                return  {
+                    borderRadius: '20px',
+                }
+            }
         }
     }
 </script>
 
 <style scoped>
+    .user {
+        display: flex;
+    }
+
+    .user .user-photo {
+        flex: 1 1 15%;
+        margin-right: 15px;
+    }
+
+    .user .user-info {
+        flex: 1 1 85%;
+    }
+
+    .image-form {
+        min-height: 313px;
+        background-image: url("https://api.teid-dev.com/storage/upload/photo/1566394731.jpg");
+        background-position: 50%;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
 
 </style>

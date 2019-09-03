@@ -61,5 +61,8 @@ export const UsersService = {
   },
   deleteUser(id){
     return ApiService.delete('admin/user', id);
+  },
+  getUserById(id) {
+    return ApiService.getByParam('admin/users', id);
   }
 };
