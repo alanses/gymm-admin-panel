@@ -33,10 +33,12 @@
 <script>
     import Users from "@/components/Users/Users";
     import {UsersService} from "@/common/api.service";
+    import debouncer from "@/util/debouncer";
 
     export default {
         name: "UsersPage",
         components: {Users},
+        mixins: [debouncer],
 
         data() {
             return {
@@ -64,7 +66,7 @@
             },
             searchUser(query) {
                 this.search = query;
-                this.getListUsers();
+                this.$debounce('search', this.getListUsers, 500)
             }
         }
     }
