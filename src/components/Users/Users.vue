@@ -16,81 +16,51 @@
             </md-table-row>
         </md-table>
 
-        <div class="pagination">
-            <b-pagination
-                    v-model="currentPage"
-                    :total-rows="total"
-                    aria-controls="my-table"
-                    :per-page="perPage"
-                    first-text="First"
-                    prev-text="Prev"
-                    next-text="Next"
-                    last-text="Last"
-                    @change="updatePagination"
-            ></b-pagination>
-        </div>
     </div>
 </template>
 
 <script>
-import {UsersService} from "@/common/api.service";
+    import {UsersService} from "@/common/api.service";
 
-export default {
-    name: "Users",
-    data() {
-        return {
-            users: [],
-            tableHeaderColor: "",
-            total: 0,
-            currentPage: 1,
-            perPage: 10,
-        };
-    },
-    created() {
-        this.getListUsers();
-    },
-    methods: {
-        updatePagination(page){
-            this.currentPage = page;
-            this.getListUsers();
+    export default {
+        name: "Users",
+        data() {
+            return {
+                tableHeaderColor: "",
+            };
         },
-
-        deleteUser(id) {
-            this.deleteUserFromDatabase(id).then(() => {
-                const index = this.users.findIndex(user => user.id === id);
-                this.users.splice(index, 1);
-            });
+        props: {
+            users: Array,
+            default: []
         },
+        methods: {
+            deleteUser(id) {
+                this.deleteUserFromDatabase(id).then(() => {
+                    const index = this.users.findIndex(user => user.id === id);
+                    this.users.splice(index, 1);
+                });
+            },
 
-        deleteUserFromDatabase(id) {
-            return UsersService.deleteUser(id);
-        },
+            deleteUserFromDatabase(id) {
+                return UsersService.deleteUser(id);
+            },
 
-        getListUsers() {
-            UsersService.getListUsers('admin/users', {'page': this.currentPage})
-                .then((result) => {
-                    this.users = result.data.data;
-                    this.total = result.data.meta.total;
-                    this.$emit('getCountUsers', this.total)
-                })
-        },
-
-        getImage(item) {
-            let photo = item.photo;
-            if(photo) {
-                return  {
-                    backgroundImage: 'url(' +item.photo +')'
+            getImage(item) {
+                let photo = item.photo;
+                if (photo) {
+                    return {
+                        backgroundImage: 'url(' + item.photo + ')'
+                    }
                 }
-            }
-        },
+            },
 
-        viewUser(userId) {
-            this.$router.push({
-                path: `/users/${userId}`
-            });
+            viewUser(userId) {
+                this.$router.push({
+                    path: `/users/${userId}`
+                });
+            }
         }
     }
-}
 </script>
 
 <style scoped>
@@ -116,7 +86,4 @@ export default {
         height: 50px;
     }
 
-    .pagination {
-        margin-top: 15px;
-    }
 </style>
