@@ -21,6 +21,7 @@
 
 <script>
     import {UsersService} from "@/common/api.service";
+    import Swal from 'sweetalert2'
 
     export default {
         name: "Users",
@@ -35,10 +36,50 @@
         },
         methods: {
             deleteUser(id) {
-                this.deleteUserFromDatabase(id).then(() => {
-                    const index = this.users.findIndex(user => user.id === id);
-                    this.users.splice(index, 1);
+                this.showMessageAboutConfirmDeleting().then((result) => {
+                    let confirmDeleting = result.value;
+
+                    if(confirmDeleting) {
+                        this.deleteUserFromDatabase(id)
+                            .then(() => this.deleteUserFromPage(id))
+                            .then(() => this.showMessageAboutDeleted())
+                            .catch(() => this.showMessageAboutError())
+                    }
                 });
+            },
+
+            deleteUserFromPage(id) {
+                const index = this.users.findIndex(user => user.id === id);
+                this.users.splice(index, 1);
+            },
+
+            showMessageAboutConfirmDeleting() {
+                return Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                });
+            },
+
+            showMessageAboutDeleted() {
+                return Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                )
+            },
+
+            showMessageAboutError() {
+                return Swal.fire({
+                    type: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                    footer: '<a href>Why do I have this issue?</a>'
+                })
             },
 
             deleteUserFromDatabase(id) {

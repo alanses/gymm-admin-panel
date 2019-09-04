@@ -25,8 +25,9 @@
 </template>
 
 <script>
-import { AutificationService } from "@/common/api.service";
+import { AutificationService, ApiService } from "@/common/api.service";
 import JwtService from "@/common/jwt.service";
+import Vue from "vue";
 
 export default {
   name: "LoginPage",
@@ -63,6 +64,7 @@ export default {
 
     setToken(token) {
       JwtService.saveToken(token);
+      Vue.axios.defaults.headers.common.Authorization = `Bearer ${token}`;
     }
   }
 };

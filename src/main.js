@@ -36,13 +36,20 @@ import MaterialDashboard from "./material-dashboard";
 
 import Chartist from "chartist";
 
+// Api Service
 import ApiService from "./common/api.service";
+import {authGuard} from "./guards/authGuard";
+
+// Guards
+
 // configure router
 const router = new VueRouter({
   mode: "history",
   routes, // short for routes: routes
   linkExactActiveClass: "nav-item active"
 });
+
+router.beforeEach(authGuard);
 
 Vue.prototype.$Chartist = Chartist;
 

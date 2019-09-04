@@ -11,6 +11,7 @@ import Notifications from "@/pages/Notifications.vue";
 import LoginPage from "@/views/LoginPage.vue";
 import UsersPage from "@/views/UsersPage.vue";
 import UserPage from "@/views/UserPage";
+import GymsPage from "../views/GymsPage";
 
 const routes = [
   {
@@ -66,8 +67,16 @@ const routes = [
         name: "user",
         path: "/users/:id",
         component: UserPage
+      },
+      {
+        path: "/gyms",
+        name: "gyms",
+        component: GymsPage
       }
-    ]
+    ],
+    meta: {
+      requiresAuth: true
+    },
   },
   {
     path: "/login",

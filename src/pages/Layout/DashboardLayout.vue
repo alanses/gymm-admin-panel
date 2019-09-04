@@ -12,6 +12,14 @@
         <md-icon>person</md-icon>
         <p>User Profile</p>
       </sidebar-link>
+      <sidebar-link to="/users">
+        <md-icon>supervised_user_circle</md-icon>
+        <p>Users</p>
+      </sidebar-link>
+      <sidebar-link to="/gyms">
+        <md-icon>accessibility</md-icon>
+        <p>Gyms</p>
+      </sidebar-link>
       <sidebar-link to="/table">
         <md-icon>content_paste</md-icon>
         <p>Table list</p>

@@ -11,7 +11,8 @@ const ApiService = {
   },
 
   setHeader() {
-    Vue.axios.defaults.headers.common.Authorization = `Bearer ${JwtService.getToken()}`;
+    let token = window.localStorage.getItem('access_token');
+    Vue.axios.defaults.headers.common.Authorization = `Bearer ${token}`;
   },
 
   setInterceptor(router) {
@@ -64,5 +65,11 @@ export const UsersService = {
   },
   getUserById(id) {
     return ApiService.getByParam('admin/users', id);
+  }
+};
+
+export const GymsService = {
+  getListGyms(params){
+    return ApiService.get('admin/gyms', params);
   }
 };
