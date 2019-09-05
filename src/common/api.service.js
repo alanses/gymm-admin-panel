@@ -71,5 +71,8 @@ export const UsersService = {
 export const GymsService = {
   getListGyms(params){
     return ApiService.get('admin/gyms', params);
+  },
+  confirmGym(id, params) {
+    return ApiService.update('admin/gyms/confirm', id, params);
   }
 };

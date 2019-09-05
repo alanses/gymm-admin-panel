@@ -10,7 +10,7 @@
                     <h4 class="title">Gyms: {{total}}</h4>
                 </md-card-header>
                 <md-card-content>
-                    
+                    <gyms :gyms="gyms"></gyms>
                 </md-card-content>
                 <div class="pagination">
                     <b-pagination
@@ -33,9 +33,11 @@
 <script>
     import debouncer from "@/util/debouncer";
     import {GymsService} from "@/common/api.service";
+    import Gyms from "@/components/Gyms/Gyms";
 
     export default {
         name: "GymsPage",
+        components: {Gyms},
         mixins: [debouncer],
 
         data() {
