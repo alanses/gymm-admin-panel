@@ -12,6 +12,7 @@ import LoginPage from "@/views/LoginPage.vue";
 import UsersPage from "@/views/UsersPage.vue";
 import UserPage from "@/views/UserPage";
 import GymsPage from "../views/GymsPage";
+import GymPage from "../views/GymPage";
 
 const routes = [
   {
@@ -69,9 +70,14 @@ const routes = [
         component: UserPage
       },
       {
-        path: "/gyms",
         name: "gyms",
+        path: "/gyms",
         component: GymsPage
+      },
+      {
+        name: "gym",
+        path: "/gyms/:id",
+        component: GymPage
       }
     ],
     meta: {

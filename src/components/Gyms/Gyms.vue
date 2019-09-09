@@ -46,7 +46,7 @@
         methods: {
             viewGym(userId) {
                 this.$router.push({
-                    path: `/users/${userId}`
+                    path: `/gyms/${userId}`
                 });
             },
 

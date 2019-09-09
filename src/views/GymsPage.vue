@@ -76,5 +76,11 @@
 </script>
 
 <style scoped>
+    .pagination {
+        margin-top: 15px;
+    }
 
+    .search-user {
+        width: 300px;
+    }
 </style>
