@@ -57,7 +57,6 @@ export default {
           this.$router.push({ name: "home" });
         })
         .catch(error => {
-          console.log(error);
           this.errors.hasErrors = true;
         });
     },
