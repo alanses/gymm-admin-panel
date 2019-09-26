@@ -1,0 +1,22 @@
+version: 2
+
+jobs:
+  lint-and-deploy:
+    docker:
+      - image: circleci/node:10.15.3-stretch
+    steps:
+      - checkout
+      - run:
+          name: Install packages
+          command: npm install
+      - run:
+          name: Run tests
+          command: echo "This is just sample config, please replace this command with real tests :)"
+      - run:
+          name: Build and minify app
+          command: npm build
+workflows:
+  version: 2
+  main:
+    jobs:
+      - lint-and-deploy
