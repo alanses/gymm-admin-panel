@@ -50,6 +50,7 @@
             }
         },
         created() {
+            console.log(123);
             this.getListGyms();
         },
 
