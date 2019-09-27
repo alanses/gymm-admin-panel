@@ -16,9 +16,8 @@ jobs:
           name: Build and minify app
           command: npm build
   deploy:
-    build:
-      docker:
-        - image: circleci/node:10.15.3-stretch
+    docker:
+      - image: circleci/node:10.15.3-stretch
     steps:
       - checkout
       - run:
