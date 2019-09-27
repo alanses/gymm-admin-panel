@@ -1,7 +1,7 @@
 version: 2
 
 jobs:
-  lint-and-deploy:
+  build:
     docker:
       - image: circleci/node:10.15.3-stretch
     steps:
@@ -15,8 +15,20 @@ jobs:
       - run:
           name: Build and minify app
           command: npm build
+  deploy:
+    steps:
+      - checkout
+      - run:
+          name: Run only into master
+          command: echo "Run only into master"
 workflows:
   version: 2
   main:
     jobs:
-      - lint-and-deploy
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
