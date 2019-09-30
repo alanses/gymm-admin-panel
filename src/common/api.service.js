@@ -79,6 +79,12 @@ export const GymsService = {
     return ApiService.update('admin/gyms/confirm', id, params);
   },
   updateGym(id, params) {
-    // return ApiService.update('', id, params);
+    return ApiService.update('admin/gyms', id, params);
+  }
+};
+
+export const LocationService = {
+  getLocation(query) {
+    return ApiService.get('admin/location/google', query);
   }
 };
