@@ -22,7 +22,11 @@
                         <div class="md-layout-item md-small-size-100 md-size-100">
                             <md-field>
                                 <label>Address</label>
-                                <md-input v-model="gym.address" type="text"></md-input>
+                                <md-input
+                                        @input="searchAddress"
+                                        v-model="gym.address"
+                                        type="text"
+                                ></md-input>
                             </md-field>
                         </div>
                         <div class="md-layout-item md-small-size-100 md-size-100">
@@ -57,13 +61,14 @@
 </template>
 
 <script>
-    import {GymsService} from "@/common/api.service";
+    import {GymsService, LocationService} from "@/common/api.service";
 
     export default {
         name: "Gym",
         data() {
             return {
                 gym: {},
+                search: null,
             };
         },
         created() {
@@ -78,15 +83,21 @@
                 return GymsService.getGym(id);
             },
             updateGym() {
-                // let id = this.gym.id;
+                let id = this.gym.id;
 
-                // GymsService.updateGym(id, this.getDateForUpdate()).then((result) => {
-                //     this.updateGymData(result);
-                // });
+                GymsService.updateGym(id, this.getDateForUpdate()).then((result) => {
+                    this.updateGymData(result);
+                });
             },
 
             updateGymData(result) {
                 this.gym = result.data.data;
+            },
+
+            searchAddress: function (query) {
+                LocationService.getLocation({address: query}).then((result) => {
+                    console.log(result);
+                })
             },
 
             getDateForUpdate() {
