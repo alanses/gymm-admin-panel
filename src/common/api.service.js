@@ -85,6 +85,6 @@ export const GymsService = {
 
 export const LocationService = {
   getLocation(query) {
-    return ApiService.get('admin/location/google', query);
+    return ApiService.get('admin/location', query);
   }
 };

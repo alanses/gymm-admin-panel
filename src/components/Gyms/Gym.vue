@@ -62,9 +62,11 @@
 
 <script>
     import {GymsService, LocationService} from "@/common/api.service";
+    import debouncer from "@/util/debouncer";
 
     export default {
         name: "Gym",
+        mixins: [debouncer],
         data() {
             return {
                 gym: {},
@@ -94,10 +96,27 @@
                 this.gym = result.data.data;
             },
 
-            searchAddress: function (query) {
-                LocationService.getLocation({address: query}).then((result) => {
-                    console.log(result);
-                })
+            searchAddress(query) {
+                this.search = query;
+
+                if(this.search !== null) {
+                    this.$debounce('search', this.getGeolocation, 2000)
+                }
+            },
+
+            getGeolocation() {
+                LocationService.getLocation({address: this.search}).then((result) => {
+                    this.setLat(result.data.data.lat);
+                    this.setLng(result.data.data.lng);
+                });
+            },
+
+            setLat(lat) {
+                this.gym.lat = lat;
+            },
+
+            setLng(lng) {
+                this.gym.lng = lng;
             },
 
             getDateForUpdate() {
