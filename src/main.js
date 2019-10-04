@@ -40,6 +40,9 @@ import Chartist from "chartist";
 import ApiService from "./common/api.service";
 import {authGuard} from "./guards/authGuard";
 
+// Styles
+import '@/assets/css/style.css';
+
 // Guards
 
 // configure router

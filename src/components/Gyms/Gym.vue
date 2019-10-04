@@ -20,14 +20,19 @@
                             </md-field>
                         </div>
                         <div class="md-layout-item md-small-size-100 md-size-100">
-                            <md-field>
-                                <label>Address</label>
-                                <md-input
-                                        @input="searchAddress"
-                                        v-model="gym.address"
-                                        type="text"
-                                ></md-input>
-                            </md-field>
+                            <div class="google-map">
+                                <md-field>
+                                    <google-map
+                                            ref="google-address"
+                                            :country="['ua']"
+                                            :address="gym.address"
+                                            id="map"
+                                            placeholder="Address"
+                                            @placechanged="getAddressData"
+                                    >
+                                    </google-map>
+                                </md-field>
+                            </div>
                         </div>
                         <div class="md-layout-item md-small-size-100 md-size-100">
                             <md-field>
@@ -48,6 +53,7 @@
                             </md-field>
                         </div>
                     </div>
+
                 </md-card-content>
             </md-card>
 
@@ -61,12 +67,12 @@
 </template>
 
 <script>
-    import {GymsService, LocationService} from "@/common/api.service";
-    import debouncer from "@/util/debouncer";
+    import {GymsService} from "@/common/api.service";
+    import GoogleMap from "../Maps/GoogleMap";
 
     export default {
         name: "Gym",
-        mixins: [debouncer],
+        components: {GoogleMap},
         data() {
             return {
                 gym: {},
@@ -96,27 +102,21 @@
                 this.gym = result.data.data;
             },
 
-            searchAddress(query) {
-                this.search = query;
+            getAddressData(place) {
+                let street_number = null;
+                let address = null;
+                let route = place.route;
+                let administrative_area_level_1 = place.administrative_area_level_1;
+                let country = place.country;
 
-                if(this.search !== null) {
-                    this.$debounce('search', this.getGeolocation, 2000)
+                if(place.hasOwnProperty('street_number')) {
+                    street_number = place.street_number;
+                    address = route + ', ' + street_number + ', ' + administrative_area_level_1 + ', ' + country;
+                } else {
+                    address = route + ', ' + administrative_area_level_1 + ', ' + country;
                 }
-            },
 
-            getGeolocation() {
-                LocationService.getLocation({address: this.search}).then((result) => {
-                    this.setLat(result.data.data.lat);
-                    this.setLng(result.data.data.lng);
-                });
-            },
-
-            setLat(lat) {
-                this.gym.lat = lat;
-            },
-
-            setLng(lng) {
-                this.gym.lng = lng;
+                this.gym.address = address;
             },
 
             getDateForUpdate() {
@@ -134,5 +134,9 @@
 </script>
 
 <style scoped>
-
+    #map {
+        width: 100%;
+        height: 50px;
+        border: none;
+    }
 </style>
