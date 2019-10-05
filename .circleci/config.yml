@@ -29,11 +29,8 @@ jobs:
           name: Add sshpass
           command: sudo apt-get install sshpass
       - run:
-          name: login into server
-          command: sshpass -p $PASSWORD ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $LOGIN@$IP -p $PORT
-      - run:
-          name: List dir
-          command: ls -a
+          name: pull changes to server
+          command: sshpass -p $PASSWORD ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $LOGIN@$IP -p $PORT && ls
 workflows:
   version: 2
   main:
