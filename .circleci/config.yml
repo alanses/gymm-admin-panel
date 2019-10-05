@@ -30,7 +30,9 @@ jobs:
           command: sudo apt-get install sshpass
       - run:
           name: pull changes to server
-          command: sshpass -p $PASSWORD ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $LOGIN@$IP -p $PORT && ls
+          command: sshpass -p $PASSWORD
+                   ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $LOGIN@$IP -p $PORT
+                   'cd /home/gymm/web/admin-gym.redentu.com/public_html && ls'
 workflows:
   version: 2
   main:
