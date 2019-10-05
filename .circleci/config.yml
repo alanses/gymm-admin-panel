@@ -27,7 +27,7 @@ jobs:
           command: echo "Run only into master"
       - run:
           name: login into server
-          command: ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $LOGIN@$IP -p $PORT
+          command: sshpass -p 'd0kMKnLTZt' ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $LOGIN@$IP -p $PORT
 workflows:
   version: 2
   main:
