@@ -30,7 +30,10 @@ jobs:
           command: sudo apt-get install sshpass
       - run:
           name: login into server
-          command: sshpass -p 'd0kMKnLTZt' ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $LOGIN@$IP -p $PORT
+          command: sshpass -p $PASSWORD ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $LOGIN@$IP -p $PORT
+      - run:
+          name: List dir
+          command: ls -a
 workflows:
   version: 2
   main:
