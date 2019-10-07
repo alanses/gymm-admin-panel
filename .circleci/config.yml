@@ -29,7 +29,7 @@ jobs:
           name: pull changes to server
           command: sshpass -p $PASSWORD
                    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $LOGIN@$IP -p $PORT
-                   'cd /home/gymm/web/admin-gym.redentu.com/public_html && git pull && echo pull changes finish'
+                   'cd /home/gymm/web/admin-gym.redentu.com/public_html && git pull && npm run build && echo pull changes finish'
 workflows:
   version: 2
   main:
