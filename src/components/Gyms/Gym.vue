@@ -93,7 +93,9 @@
             updateGym() {
                 let id = this.gym.id;
 
-                GymsService.updateGym(id,
+                GymsService.updateGym(id, this.getDateForUpdate()).then((result) => {
+                    this.updateGymData(result);
+                });
             },
 
             updateGymData(result) {
