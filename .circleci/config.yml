@@ -10,11 +10,8 @@ jobs:
           name: Install packages
           command: npm install
       - run:
-          name: Run tests
-          command: echo "This is just sample config, please replace this command with real tests :)"
-      - run:
           name: Build and minify app
-          command: npm build
+          command: npm run build
   deploy:
     docker:
       - image: circleci/node:10.15.3-stretch
