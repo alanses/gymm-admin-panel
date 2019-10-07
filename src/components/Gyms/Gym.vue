@@ -108,6 +108,7 @@
                 let route = place.route;
                 let administrative_area_level_1 = place.administrative_area_level_1;
                 let country = place.country;
+                console.log(123);
 
                 if(place.hasOwnProperty('street_number')) {
                     street_number = place.street_number;
