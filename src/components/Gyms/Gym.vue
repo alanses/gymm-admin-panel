@@ -22,15 +22,16 @@
                         <div class="md-layout-item md-small-size-100 md-size-100">
                             <div class="google-map">
                                 <md-field>
-                                    <google-map
+                                    <AutocompleteGoogleMap
                                             ref="google-address"
                                             :country="['ua']"
                                             :address="gym.address"
                                             id="map"
                                             placeholder="Address"
-                                            @placechanged="getAddressData"
+                                            @change="getInputAddress"
+                                            @placechanged="getCoordinates"
                                     >
-                                    </google-map>
+                                    </AutocompleteGoogleMap>
                                 </md-field>
                             </div>
                         </div>
@@ -68,11 +69,11 @@
 
 <script>
     import {GymsService} from "@/common/api.service";
-    import GoogleMap from "../Maps/GoogleMap";
+    import AutocompleteGoogleMap from "../Maps/AutocompleteGoogleMap";
 
     export default {
         name: "Gym",
-        components: {GoogleMap},
+        components: {AutocompleteGoogleMap},
         data() {
             return {
                 gym: {},
@@ -102,20 +103,12 @@
                 this.gym = result.data.data;
             },
 
-            getAddressData(place) {
-                let street_number = null;
-                let address = null;
-                let route = place.route;
-                let administrative_area_level_1 = place.administrative_area_level_1;
-                let country = place.country;
+            getCoordinates(place) {
+                this.setLng(place);
+                this.setLat(place);
+            },
 
-                if(place.hasOwnProperty('street_number')) {
-                    street_number = place.street_number;
-                    address = route + ', ' + street_number + ', ' + administrative_area_level_1 + ', ' + country;
-                } else {
-                    address = route + ', ' + administrative_area_level_1 + ', ' + country;
-                }
-
+            getInputAddress(address) {
                 this.gym.address = address;
             },
 
@@ -128,6 +121,14 @@
                   'available_from': this.gym.available_from,
                   'available_to': this.gym.available_to
                 };
+            },
+
+            setLng(place) {
+                this.gym.lng = place.latitude;
+            },
+
+            setLat(place) {
+                this.gym.lat = place.longitude
             }
         }
     }

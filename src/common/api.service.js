@@ -18,11 +18,13 @@ const ApiService = {
   setInterceptor(router) {
     Vue.axios.interceptors.response.use(undefined, err => {
       return new Promise(() => {
-        if (err.response.status === 401) {
-          JwtService.destroyToken();
-          router.push("/login");
+        if(err.response) {
+          if (err.response.status === 401) {
+            JwtService.destroyToken();
+            router.push("/login");
+          }
+          throw err;
         }
-        throw err;
       });
     });
   },

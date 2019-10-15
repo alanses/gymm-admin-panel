@@ -30,7 +30,7 @@
         'administrative_area_level_1', 'administrative_area_level_2'];
 
     export default {
-        name: "GoogleMap",
+        name: "AutocompleteGoogleMap",
 
         props: {
             id: {
