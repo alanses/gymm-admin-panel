@@ -40,8 +40,11 @@ import Chartist from "chartist";
 import ApiService from "./common/api.service";
 import {authGuard} from "./guards/authGuard";
 
+import VueTimepicker from 'vue2-timepicker';
+
 // Styles
 import '@/assets/css/style.css';
+import 'vue2-timepicker/dist/VueTimepicker.css';
 
 // Guards
 

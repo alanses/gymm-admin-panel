@@ -90,3 +90,18 @@ export const LocationService = {
     return ApiService.get('admin/location', query);
   }
 };
+
+export const ReviewsService = {
+  getListReviews(params) {
+    return ApiService.get('admin/reviews', params);
+  },
+  getReview(id) {
+    return ApiService.getByParam('admin/review', id);
+  },
+  confirmReview(id, params) {
+    return ApiService.update('admin/review/confirm', id, params);
+  },
+  updateReview(id, params) {
+    return ApiService.update('admin/review', id, params);
+  }
+};

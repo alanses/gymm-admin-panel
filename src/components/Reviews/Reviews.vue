@@ -1,21 +1,21 @@
 <template>
     <div>
-        <md-table v-model="gyms" :table-header-color="tableHeaderColor">
+        <md-table v-model="reviews" :table-header-color="tableHeaderColor">
             <md-table-row slot="md-table-row" slot-scope="{ item }">
                 <md-table-cell md-label="ID">{{ item.id }}</md-table-cell>
-                <md-table-cell md-label="Name">{{ item.name }}</md-table-cell>
-                <md-table-cell md-label="Email">{{ item.email }}</md-table-cell>
+                <md-table-cell md-label="Who">{{ item.who }}</md-table-cell>
+                <md-table-cell md-label="When">{{ item.when }}</md-table-cell>
+                <md-table-cell md-label="Short comment">{{ item.short_comment }}</md-table-cell>
+                <md-table-cell md-label="Activity name">{{ item.activity_name }}</md-table-cell>
                 <md-table-cell md-label="Address">{{ item.address }}</md-table-cell>
-                <md-table-cell md-label="Available from">{{ item.available_from }}</md-table-cell>
-                <md-table-cell md-label="Available to">{{ item.available_to }}</md-table-cell>
                 <md-table-cell md-label="Actions">
-                    <md-button class="btn-view" @click="viewGym(item.id)">View</md-button>
+                    <md-button class="btn-view" @click="viewReview(item.id)">View</md-button>
                 </md-table-cell>
                 <md-table-cell md-label="Available">
                     <b-form-checkbox
                             @change="makeCheck"
                             @input="makeAvailable(item.id)"
-                            :checked="item.is_available"
+                            :checked="item.published"
                             switch
                             size="lg"
                     >
@@ -27,11 +27,10 @@
 </template>
 
 <script>
-    import {GymsService} from "@/common/api.service";
-    import Swal from 'sweetalert2'
+    import {ReviewsService} from "@/common/api.service";
 
     export default {
-        name: "Gyms",
+        name: "Reviews",
         data() {
             return {
                 tableHeaderColor: "",
@@ -39,13 +38,13 @@
             };
         },
         props: {
-            gyms: Array,
+            reviews: Array,
             default: []
         },
         methods: {
-            viewGym(userId) {
+            viewReview(id) {
                 this.$router.push({
-                    path: `/gyms/${userId}`
+                    path: `/reviews/${id}`
                 });
             },
 
@@ -54,7 +53,7 @@
             },
 
             makeAvailable(id) {
-                GymsService.confirmGym(id, {'available': this.checked});
+                ReviewsService.confirmReview(id, {'available': this.checked});
             }
         }
     }

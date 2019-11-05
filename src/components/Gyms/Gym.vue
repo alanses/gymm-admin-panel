@@ -44,13 +44,13 @@
                         <div class="md-layout-item md-small-size-100 md-size-50">
                             <md-field>
                                 <label>Available From</label>
-                                <md-input v-model="gym.available_from" type="text"></md-input>
+                                <vue-timepicker v-model="gym.available_from"></vue-timepicker>
                             </md-field>
                         </div>
                         <div class="md-layout-item md-small-size-100 md-size-50">
                             <md-field>
                                 <label>Available to</label>
-                                <md-input v-model="gym.available_to" type="text"></md-input>
+                                <vue-timepicker v-model="gym.available_to"></vue-timepicker>
                             </md-field>
                         </div>
                     </div>
@@ -70,10 +70,11 @@
 <script>
     import {GymsService} from "@/common/api.service";
     import AutocompleteGoogleMap from "../Maps/AutocompleteGoogleMap";
+    import VueTimepicker from "@/components/TimePicker/TimePicker";
 
     export default {
         name: "Gym",
-        components: {AutocompleteGoogleMap},
+        components: {AutocompleteGoogleMap, VueTimepicker},
         data() {
             return {
                 gym: {},

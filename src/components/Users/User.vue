@@ -2,7 +2,10 @@
     <div class="user">
         <div class="user-photo" v-if="this.user.photo">
             <md-card>
-                <md-card-content class="image-form">
+                <md-card-content
+                        class="image-form"
+                        :style="{'backgroundImage': this.user.photo}"
+                >
                     <div class="md-layout">
                     </div>
                 </md-card-content>
@@ -100,7 +103,6 @@
 
     .image-form {
         min-height: 313px;
-        background-image: url("https://api.teid-dev.com/storage/upload/photo/1566394731.jpg");
         background-position: 50%;
         background-repeat: no-repeat;
         background-size: cover;

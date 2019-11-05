@@ -13,6 +13,8 @@ import UsersPage from "@/views/UsersPage.vue";
 import UserPage from "@/views/UserPage";
 import GymsPage from "../views/GymsPage";
 import GymPage from "../views/GymPage";
+import ReviewsPage from "../views/ReviewsPage";
+import ReviewPage from "../views/ReviewPage";
 
 const routes = [
   {
@@ -78,7 +80,17 @@ const routes = [
         name: "gym",
         path: "/gyms/:id",
         component: GymPage
-      }
+      },
+      {
+        path: "reviews",
+        name: "Reviews Page",
+        component: ReviewsPage
+      },
+      {
+        name: "review",
+        path: "/reviews/:id",
+        component: ReviewPage
+      },
     ],
     meta: {
       requiresAuth: true
