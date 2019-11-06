@@ -52,6 +52,7 @@
 
 <script>
     import {ReviewsService} from "@/common/api.service";
+    import Swal from 'sweetalert2'
 
     export default {
         name: "Review",
@@ -82,11 +83,20 @@
 
                 ReviewsService.updateReview(id, this.getDateForUpdate()).then((result) => {
                     this.updateReviewData(result);
+                    this.showMessageWithSuccessReview()
                 });
             },
 
             updateReviewData(result) {
                 this.review = result.data.data;
+            },
+
+            showMessageWithSuccessReview() {
+                Swal.fire(
+                    'Updated!',
+                    'This review been updated',
+                    'success'
+                );
             }
         }
     }

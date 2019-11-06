@@ -4,7 +4,9 @@
             <md-card>
                 <md-card-content
                         class="image-form"
-                        :style="{'backgroundImage': this.user.photo}"
+                        :style="{
+                            'background-image': 'url(' + this.user.photo + ')'
+                            }"
                 >
                     <div class="md-layout">
                     </div>
