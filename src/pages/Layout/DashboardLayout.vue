@@ -12,6 +12,10 @@
         <md-icon>accessibility</md-icon>
         <p>Gyms</p>
       </sidebar-link>
+      <sidebar-link to="/reviews">
+        <md-icon>speaker_notes</md-icon>
+        <p>Reviews</p>
+      </sidebar-link>
     </side-bar>
 
     <div class="main-panel">
