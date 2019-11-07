@@ -8,6 +8,7 @@
     :style="customPosition"
     data-notify-position="top-center"
   >
+
     <button
       type="button"
       aria-hidden="true"
