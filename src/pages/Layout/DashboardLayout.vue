@@ -5,15 +5,15 @@
     <side-bar>
       <mobile-menu slot="content"></mobile-menu>
       <sidebar-link to="/users">
-        <i class="material-icons">supervised_user_circle</i>
+<!--        <i class="material-icons">supervised_user_circle</i>-->
         <p>Users</p>
       </sidebar-link>
       <sidebar-link to="/gyms">
-        <i class="material-icons">accessibility</i>
+<!--        <i class="material-icons">accessibility</i>-->
         <p>Gyms</p>
       </sidebar-link>
       <sidebar-link to="/reviews">
-        <i class="material-icons">speaker_notes</i>
+<!--        <i class="material-icons">speaker_notes</i>-->
         <p>Reviews</p>
       </sidebar-link>
     </side-bar>
