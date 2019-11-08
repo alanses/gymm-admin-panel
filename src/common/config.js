@@ -1,2 +1,2 @@
-export const API_URL = "http://localhost:80/api/";
+export const API_URL = process.env.VUE_APP_URL;
 export default API_URL;

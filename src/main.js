@@ -45,8 +45,11 @@ import VueTimepicker from 'vue2-timepicker';
 // Styles
 import '@/assets/css/style.css';
 import 'vue2-timepicker/dist/VueTimepicker.css';
-
+import moment from 'moment';
+Vue.prototype.$moment = moment;
 // Guards
+
+// Moment
 
 // configure router
 const router = new VueRouter({
@@ -54,6 +57,7 @@ const router = new VueRouter({
   routes, // short for routes: routes
   linkExactActiveClass: "nav-item active"
 });
+
 
 router.beforeEach(authGuard);
 

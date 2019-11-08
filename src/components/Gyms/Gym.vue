@@ -24,7 +24,7 @@
                                 <md-field>
                                     <AutocompleteGoogleMap
                                             ref="google-address"
-                                            :country="['ua']"
+                                            :country="['ua', 'kz']"
                                             :address="gym.address"
                                             id="map"
                                             placeholder="Address"
@@ -44,13 +44,13 @@
                         <div class="md-layout-item md-small-size-100 md-size-50">
                             <md-field>
                                 <label>Available From</label>
-                                <vue-timepicker v-model="gym.available_from"></vue-timepicker>
+                                <vue-timepicker format="HH:mm" v-model="gym.available_from"></vue-timepicker>
                             </md-field>
                         </div>
                         <div class="md-layout-item md-small-size-100 md-size-50">
                             <md-field>
                                 <label>Available to</label>
-                                <vue-timepicker v-model="gym.available_to"></vue-timepicker>
+                                <vue-timepicker format="HH:mm" v-model="gym.available_to"></vue-timepicker>
                             </md-field>
                         </div>
                     </div>
@@ -71,13 +71,21 @@
     import {GymsService} from "@/common/api.service";
     import AutocompleteGoogleMap from "../Maps/AutocompleteGoogleMap";
     import VueTimepicker from "@/components/TimePicker/TimePicker";
+    import Swal from 'sweetalert2'
 
     export default {
         name: "Gym",
         components: {AutocompleteGoogleMap, VueTimepicker},
         data() {
             return {
-                gym: {},
+                gym: {
+                    'name': null,
+                    'email': null,
+                    'address': null,
+                    'description': null,
+                    'available_from': '',
+                    'available_to': '',
+                },
                 search: null,
             };
         },
@@ -97,6 +105,7 @@
 
                 GymsService.updateGym(id, this.getDateForUpdate()).then((result) => {
                     this.updateGymData(result);
+                    this.showMessageWithSuccessGym();
                 });
             },
 
@@ -130,6 +139,14 @@
 
             setLat(place) {
                 this.gym.lat = place.longitude
+            },
+
+            showMessageWithSuccessGym() {
+                Swal.fire(
+                    'Updated!',
+                    'This gym been updated',
+                    'success'
+                );
             }
         }
     }
