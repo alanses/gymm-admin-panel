@@ -16,6 +16,10 @@
         <i class="material-icons">speaker_notes</i>
         <p>Reviews</p>
       </sidebar-link>
+      <sidebar-link to="/cities">
+        <i class="material-icons">location_city</i>
+        <p>Cities</p>
+      </sidebar-link>
     </side-bar>
 
     <div class="main-panel">

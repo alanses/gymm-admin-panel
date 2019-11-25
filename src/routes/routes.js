@@ -15,6 +15,8 @@ import GymsPage from "../views/GymsPage";
 import GymPage from "../views/GymPage";
 import ReviewsPage from "../views/ReviewsPage";
 import ReviewPage from "../views/ReviewPage";
+import CitiesPage from "../views/CitiesPage";
+import CityPage from "../views/CityPage";
 
 const routes = [
   {
@@ -91,6 +93,16 @@ const routes = [
         path: "/reviews/:id",
         component: ReviewPage
       },
+      {
+        name: "cities",
+        path: "/cities",
+        component: CitiesPage
+      },
+      {
+        name: "city",
+        path: "/city/:id",
+        component: CityPage
+      }
     ],
     meta: {
       requiresAuth: true

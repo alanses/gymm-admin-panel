@@ -105,3 +105,18 @@ export const ReviewsService = {
     return ApiService.update('admin/review', id, params);
   }
 };
+
+export const CitiesService = {
+  getListCities(params) {
+    return ApiService.get('admin/list/cities', params);
+  },
+  getCity(id) {
+    return ApiService.getByParam('admin/city', id);
+  },
+  updateCity(id, params) {
+    return ApiService.update('admin/update/city', id, params);
+  },
+  deleteCity(id) {
+    return ApiService.delete('admin/delete/city', id);
+  }
+};
