@@ -1,21 +1,21 @@
 <template>
     <div class="content">
         <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100">
-            <div class="cities">
-                <md-field class="search-user">
+            <div class="achievements">
+                <md-field class="search-achievements">
                     <label>Search</label>
-                    <md-input v-model="search" @input="searchCity"></md-input>
+                    <md-input v-model="search" @input="searchAchievement"></md-input>
                 </md-field>
                 <div>
-                    <md-button type="submit" class="md-raised md-success" @click="createCity">Create City</md-button>
+                    <md-button type="submit" class="md-raised md-success" @click="createAchievement">Create Achievement</md-button>
                 </div>
             </div>
             <md-card>
                 <md-card-header data-background-color="green">
-                    <h4 class="title">Cities: {{total}}</h4>
+                    <h4 class="title">Achievements: {{total}}</h4>
                 </md-card-header>
                 <md-card-content>
-                    <cities :cities="cities"></cities>
+                    <achievements :achievements="achievements"></achievements>
                 </md-card-content>
                 <div class="pagination">
                     <b-pagination
@@ -37,17 +37,17 @@
 
 <script>
     import debouncer from "@/util/debouncer";
-    import {CitiesService} from "@/common/api.service";
-    import Cities from "../components/Cities/Cities";
+    import {AchievementsService} from "@/common/api.service";
+    import Achievements from "../components/Achievements/Achievements";
 
     export default {
-        name: "CitiesPage",
-        components: {Cities},
+        name: "AchievementsPage",
+        components: {Achievements},
         mixins: [debouncer],
 
         data() {
             return {
-                cities: [],
+                achievements: [],
                 search: null,
                 total: 0,
                 currentPage: 1,
@@ -55,30 +55,31 @@
             }
         },
         created() {
-            this.getListCities();
+            this.getListAchievements();
         },
 
         methods: {
-            getListCities() {
-                CitiesService.getListCities({'page': this.currentPage, 'search': this.search})
+            getListAchievements() {
+                AchievementsService.getListAchievements({'page': this.currentPage, 'search': this.search})
                     .then((result) => {
-                        this.cities = result.data.data;
+                        console.log(result.data.meta);
+                        this.achievements = result.data.data;
                         this.total = result.data.meta.total;
                     });
             },
 
             updatePagination(page) {
                 this.currentPage = page;
-                this.getListCities();
+                this.getListAchievements();
             },
 
-            searchCity(query) {
+            searchAchievement(query) {
                 this.search = query;
-                this.$debounce('search', this.getListCities, 500)
+                this.$debounce('search', this.getListAchievements, 500)
             },
 
-            createCity() {
-                this.$router.push({ name: "create_city" });
+            createAchievement() {
+                this.$router.push({ name: "create_achievement" });
             }
         }
     }
@@ -89,11 +90,11 @@
         margin-top: 15px;
     }
 
-    .search-user {
+    .search-achievements {
         width: 300px;
     }
 
-    .cities {
+    .achievements {
         display: flex;
         justify-content: space-between;
     }

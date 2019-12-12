@@ -116,7 +116,49 @@ export const CitiesService = {
   updateCity(id, params) {
     return ApiService.update('admin/update/city', id, params);
   },
+  createCity(params) {
+    return ApiService.post('admin/create/city', params);
+  },
   deleteCity(id) {
     return ApiService.delete('admin/delete/city', id);
+  }
+};
+
+export const ActivitiesService = {
+  getListActivities(params) {
+    return ApiService.get('admin/activities', params);
+  },
+  getActivity(id) {
+    return ApiService.getByParam('admin/activity', id);
+  },
+  createActivity(params) {
+    return ApiService.post('admin/create/activity', params);
+  },
+  updateActivity(params) {
+    return ApiService.post('admin/update/activity', params);
+  },
+  deleteActivity(id) {
+    return ApiService.delete('admin/activity', id);
+  }
+};
+
+export const AchievementsService = {
+  getListAchievements(params) {
+    return ApiService.get('admin/achievements', params);
+  },
+  getAchievement(id) {
+    return ApiService.getByParam('admin/achievement', id);
+  },
+  createAchievement(params) {
+    return ApiService.post('admin/create/achievement', params);
+  },
+  updateAchievement(params) {
+    return ApiService.post('admin/update/achievement', params);
+  },
+  deleteAchievement(id) {
+    return ApiService.delete('admin/achievement', id);
+  },
+  getListActivitiesForSelect() {
+    return ApiService.get('admin/list/activities/for/select');
   }
 };

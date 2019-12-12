@@ -17,6 +17,13 @@ import ReviewsPage from "../views/ReviewsPage";
 import ReviewPage from "../views/ReviewPage";
 import CitiesPage from "../views/CitiesPage";
 import CityPage from "../views/CityPage";
+import ActivitiesPage from "../views/ActivitiesPage";
+import ActivityPage from "../views/ActivityPage";
+import CreateCityPage from "../views/CreateCityPage";
+import CreateActivityPage from "../views/CreateActivityPage";
+import CreateAchiemenentPage from "../views/CreateAchiemenentPage";
+import AchievementsPage from "../views/AchievementsPage";
+import AchievementPage from "../views/AchievementPage";
 
 const routes = [
   {
@@ -102,7 +109,42 @@ const routes = [
         name: "city",
         path: "/city/:id",
         component: CityPage
-      }
+      },
+      {
+        name: "create_city",
+        path: "create/city",
+        component: CreateCityPage
+      },
+      {
+        name: "activities",
+        path: '/activities',
+        component: ActivitiesPage
+      },
+      {
+        name: "activity",
+        path: '/activity/:id',
+        component: ActivityPage
+      },
+      {
+        name: "create_activity",
+        path: '/create/activity',
+        component: CreateActivityPage
+      },
+      {
+        name: "achievements",
+        path: "achievements",
+        component: AchievementsPage
+      },
+      {
+        name: "achievement",
+        path: "/achievement/:id",
+        component: AchievementPage,
+      },
+      {
+        name: "create_achievement",
+        path: "/create/achievement",
+        component: CreateAchiemenentPage
+      },
     ],
     meta: {
       requiresAuth: true

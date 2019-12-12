@@ -20,6 +20,14 @@
         <i class="material-icons">location_city</i>
         <p>Cities</p>
       </sidebar-link>
+      <sidebar-link to="/activities">
+        <i class="material-icons">sports_handball</i>
+        <p>Activities</p>
+      </sidebar-link>
+      <sidebar-link to="/achievements">
+        <i class="material-icons">emoji_events</i>
+        <p>Achievement</p>
+      </sidebar-link>
     </side-bar>
 
     <div class="main-panel">
