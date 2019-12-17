@@ -48,7 +48,7 @@ import Swal from "sweetalert2";
                             </div>
                             <div class="md-layout-item md-small-size-100 md-size-100">
                                 <md-field>
-                                    <md-input @change="uploadFile" type="file"></md-input>
+                                    <md-input @change="uploadFile" type="file" required></md-input>
                                 </md-field>
                             </div>
                         </div>

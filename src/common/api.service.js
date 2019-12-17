@@ -121,6 +121,9 @@ export const CitiesService = {
   },
   deleteCity(id) {
     return ApiService.delete('admin/delete/city', id);
+  },
+  listCitiesForSelect() {
+    return ApiService.get('list/cities/for/select');
   }
 };
 

@@ -9,7 +9,6 @@
 
                 <md-table-cell md-label="Actions">
                     <md-button class="btn-view" @click="viewActivity(item.id)">View</md-button>
-                    <md-button @click="deleteActivity(item.id)" class="btn-delete">Delete</md-button>
                 </md-table-cell>
             </md-table-row>
         </md-table>

@@ -53,6 +53,17 @@
                                 <vue-timepicker format="HH:mm" v-model="gym.available_to"></vue-timepicker>
                             </md-field>
                         </div>
+                        <div class="md-layout-item md-small-size-100 md-size-100">
+                            <md-field>
+                                <label>City</label>
+                                <md-select v-model="gym.city_id" :required="checkIfCityChecked()">
+                                    <md-option
+                                            v-for="city in list_cities"
+                                            :value="city.id"
+                                    >{{city.displayed_name}}</md-option>
+                                </md-select>
+                            </md-field>
+                        </div>
                     </div>
 
                 </md-card-content>
@@ -68,7 +79,7 @@
 </template>
 
 <script>
-    import {GymsService} from "@/common/api.service";
+    import {GymsService, CitiesService} from "@/common/api.service";
     import AutocompleteGoogleMap from "../Maps/AutocompleteGoogleMap";
     import VueTimepicker from "@/components/TimePicker/TimePicker";
     import Swal from 'sweetalert2'
@@ -85,8 +96,10 @@
                     'description': null,
                     'available_from': '',
                     'available_to': '',
+                    'city_id': null
                 },
                 search: null,
+                list_cities: null
             };
         },
         created() {
@@ -94,6 +107,8 @@
             this.getGymById(id).then((response) => {
                 this.gym = response.data.data;
             })
+
+            this.getListCities();
         },
 
         methods: {
@@ -129,7 +144,8 @@
                   'address': this.gym.address,
                   'description': this.gym.description,
                   'available_from': this.gym.available_from,
-                  'available_to': this.gym.available_to
+                  'available_to': this.gym.available_to,
+                  'city_id': this.gym.city_id
                 };
             },
 
@@ -147,6 +163,16 @@
                     'This gym been updated',
                     'success'
                 );
+            },
+
+            getListCities() {
+                CitiesService.getListCities().then((res) => {
+                    this.list_cities = res.data.data;
+                });
+            },
+
+            checkIfCityChecked() {
+                return this.gym.city_id ? false : true;
             }
         }
     }

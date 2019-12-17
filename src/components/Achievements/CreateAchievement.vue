@@ -42,7 +42,7 @@
                             <div class="md-layout-item md-small-size-100 md-size-50">
                                 <md-field>
                                     <label>Activity</label>
-                                    <md-select v-model="achievement.activity_id">
+                                    <md-select v-model="achievement.activity_id" :required="checkIfActivityChecked()">
                                         <md-option
                                                 v-for="activity in list_activities"
                                                 :value="activity.id"
@@ -58,7 +58,7 @@
                             </div>
                             <div class="md-layout-item md-small-size-100 md-size-100">
                                 <md-field>
-                                    <md-input @change="uploadFile" type="file"></md-input>
+                                    <md-input @change="uploadFile" type="file" required></md-input>
                                 </md-field>
                             </div>
                         </div>
@@ -113,10 +113,17 @@
                 });
             },
 
+            checkIfActivityChecked() {
+                return this.achievement.activity_id ? false : true;
+            },
+
             getDataForCreateAchievement() {
                 let formData = new FormData();
 
-                formData.append('image', this.achievement.file);
+                if(this.achievement.file) {
+                    formData.append('image', this.achievement.file);
+                }
+
                 formData.append('displayed_name', this.achievement.displayed_name);
                 formData.append('name', this.achievement.name);
                 formData.append('kz_displayed_name', this.achievement.kz_displayed_name);

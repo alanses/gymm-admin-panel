@@ -42,7 +42,7 @@
                             <div class="md-layout-item md-small-size-100 md-size-50">
                                 <md-field>
                                     <label>Activity</label>
-                                    <md-select v-model="achievement.activity_id">
+                                    <md-select v-model="achievement.activity_id" :required="checkIfActivityChecked()">
                                         <md-option
                                                 v-for="activity in list_activities"
                                                 :value="activity.id"
@@ -58,7 +58,7 @@
                             </div>
                             <div class="md-layout-item md-small-size-100 md-size-100">
                                 <md-field>
-                                    <md-input @change="uploadFile" type="file"></md-input>
+                                    <md-input @change="uploadFile" type="file" required></md-input>
                                 </md-field>
                             </div>
                         </div>
@@ -116,7 +116,7 @@
             },
 
             updateAchievement() {
-                AchievementsService.updateAchievement(this.getDataForUpdateActivity()).then((response) => {
+                AchievementsService.updateAchievement(this.getDataForUpdateAchivement()).then((response) => {
                     this.achievement = response.data.data;
                     this.showMessageWithSuccessAchievement();
                 });
@@ -130,7 +130,7 @@
                 );
             },
 
-            getDataForUpdateActivity() {
+            getDataForUpdateAchivement() {
                 let formData = new FormData();
 
                 if(this.achievement.file) {
@@ -149,6 +149,10 @@
             uploadFile(event) {
                 this.achievement.file = event.target.files[0];
             },
+
+            checkIfActivityChecked() {
+                return this.achievement.activity_id ? false : true;
+            }
         }
     }
 </script>
