@@ -36,6 +36,7 @@
 <script>
     import {CitiesService} from "@/common/api.service";
     import Swal from 'sweetalert2'
+    import {ValidationService} from "@/common/validation.service";
 
     export default {
         name: "City",
@@ -67,7 +68,20 @@
                 CitiesService.updateCity(id, this.getDateForUpdate()).then((result) => {
                     this.updateCityData(result);
                     this.showMessageWithSuccessCity();
-                });
+                }).catch((error) => {
+                    if(error.response) {
+                        let listMessages = ValidationService.getListErrors(error.response.data.errors);
+                        this.showMessageWithErrorCity(listMessages);
+                    }
+                })
+            },
+
+            showMessageWithErrorCity(message) {
+                Swal.fire(
+                    'Error!',
+                    message,
+                    'error'
+                );
             },
 
             showMessageWithSuccessCity() {

@@ -67,6 +67,7 @@
 <script>
     import {ActivitiesService} from "@/common/api.service";
     import Swal from 'sweetalert2'
+    import {ValidationService} from "@/common/validation.service";
 
     export default {
         name: "CreateActivity",
@@ -87,6 +88,11 @@
                 ActivitiesService.createActivity(this.getDataForCreateCity()).then((result) => {
                     this.activity = result.data.data;
                     this.showMessageWithSuccessCity();
+                }).catch((error) => {
+                    if(error.response) {
+                        let listMessages = ValidationService.getListErrors(error.response.data.errors);
+                        this.showMessageWithErrorActivity(listMessages);
+                    }
                 });
             },
 
@@ -104,6 +110,14 @@
 
             uploadFile(event) {
                 this.activity.file = event.target.files[0];
+            },
+
+            showMessageWithErrorActivity(message) {
+                Swal.fire(
+                    'Error!',
+                    message,
+                    'error'
+                );
             },
 
             showMessageWithSuccessCity() {

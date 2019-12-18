@@ -80,6 +80,7 @@
 
 <script>
     import {GymsService, CitiesService} from "@/common/api.service";
+    import {ValidationService} from "@/common/validation.service";
     import AutocompleteGoogleMap from "../Maps/AutocompleteGoogleMap";
     import VueTimepicker from "@/components/TimePicker/TimePicker";
     import Swal from 'sweetalert2'
@@ -121,6 +122,11 @@
                 GymsService.updateGym(id, this.getDateForUpdate()).then((result) => {
                     this.updateGymData(result);
                     this.showMessageWithSuccessGym();
+                }).catch((error) => {
+                    if(error.response) {
+                        let listMessages = ValidationService.getListErrors(error.response.data.errors);
+                        this.showMessageWithErrorGym(listMessages);
+                    }
                 });
             },
 
@@ -162,6 +168,14 @@
                     'Updated!',
                     'This gym been updated',
                     'success'
+                );
+            },
+
+            showMessageWithErrorGym(message) {
+                Swal.fire(
+                    'Error!',
+                    message,
+                    'error'
                 );
             },
 

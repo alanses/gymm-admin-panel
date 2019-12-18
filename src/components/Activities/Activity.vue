@@ -48,7 +48,7 @@ import Swal from "sweetalert2";
                             </div>
                             <div class="md-layout-item md-small-size-100 md-size-100">
                                 <md-field>
-                                    <md-input @change="uploadFile" type="file" required></md-input>
+                                    <md-input @change="uploadFile" type="file" ></md-input>
                                 </md-field>
                             </div>
                         </div>
@@ -68,6 +68,7 @@ import Swal from "sweetalert2";
 <script>
     import {ActivitiesService} from "@/common/api.service";
     import Swal from 'sweetalert2'
+    import {ValidationService} from "@/common/validation.service";
 
     export default {
         name: "Activity",
@@ -96,7 +97,20 @@ import Swal from "sweetalert2";
                 ActivitiesService.updateActivity(this.getDataForCreateCity()).then((response) => {
                     this.activity = response.data.data;
                     this.showMessageWithSuccessCity();
+                }).catch((error) => {
+                    if(error.response) {
+                        let listMessages = ValidationService.getListErrors(error.response.data.errors);
+                        this.showMessageWithErrorActivity(listMessages);
+                    }
                 });
+            },
+
+            showMessageWithErrorActivity(message) {
+                Swal.fire(
+                    'Error!',
+                    message,
+                    'error'
+                );
             },
 
             showMessageWithSuccessCity() {
