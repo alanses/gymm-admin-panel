@@ -62,7 +62,6 @@
             getListAchievements() {
                 AchievementsService.getListAchievements({'page': this.currentPage, 'search': this.search})
                     .then((result) => {
-                        console.log(result.data.meta);
                         this.achievements = result.data.data;
                         this.total = result.data.meta.total;
                     });

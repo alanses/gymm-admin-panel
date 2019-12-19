@@ -58,7 +58,7 @@
                             </div>
                             <div class="md-layout-item md-small-size-100 md-size-100">
                                 <md-field>
-                                    <md-input @change="uploadFile" type="file" required></md-input>
+                                    <md-input @change="uploadFile" type="file"></md-input>
                                 </md-field>
                             </div>
                         </div>
@@ -78,6 +78,7 @@
 <script>
     import {AchievementsService} from "@/common/api.service";
     import Swal from 'sweetalert2'
+    import {ValidationService} from "@/common/validation.service";
 
     export default {
         name: "Achievement",
@@ -119,6 +120,11 @@
                 AchievementsService.updateAchievement(this.getDataForUpdateAchivement()).then((response) => {
                     this.achievement = response.data.data;
                     this.showMessageWithSuccessAchievement();
+                }).catch((error) => {
+                    if(error.response) {
+                        let listMessages = ValidationService.getListErrors(error.response.data.errors);
+                        this.showMessageWithErrorAchievement(listMessages);
+                    }
                 });
             },
 
@@ -127,6 +133,14 @@
                     'Updated!',
                     'This achievement been update',
                     'success'
+                );
+            },
+
+            showMessageWithErrorAchievement(message) {
+                Swal.fire(
+                    'Error!',
+                    message,
+                    'error'
                 );
             },
 

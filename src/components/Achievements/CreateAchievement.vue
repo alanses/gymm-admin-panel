@@ -78,6 +78,7 @@
 <script>
     import {AchievementsService} from "@/common/api.service";
     import Swal from 'sweetalert2'
+    import {ValidationService} from "@/common/validation.service";
 
     export default {
         name: "CreateAchievement",
@@ -104,7 +105,20 @@
                 AchievementsService.createAchievement(this.getDataForCreateAchievement()).then((result) => {
                     this.achievement = result.data.data;
                     this.showMessageWithSuccessCity();
+                }).catch((error) => {
+                    if(error.response) {
+                        let listMessages = ValidationService.getListErrors(error.response.data.errors);
+                        this.showMessageWithErrorAchievement(listMessages);
+                    }
                 });
+            },
+
+            showMessageWithErrorAchievement(message) {
+                Swal.fire(
+                    'Error!',
+                    message,
+                    'error'
+                );
             },
 
             getListActivities() {
