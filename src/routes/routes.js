@@ -24,6 +24,7 @@ import CreateActivityPage from "../views/CreateActivityPage";
 import CreateAchiemenentPage from "../views/CreateAchiemenentPage";
 import AchievementsPage from "../views/AchievementsPage";
 import AchievementPage from "../views/AchievementPage";
+import PhotoSliderPage from "../views/PhotoSliderPage";
 
 const routes = [
   {
@@ -145,6 +146,11 @@ const routes = [
         path: "/create/achievement",
         component: CreateAchiemenentPage
       },
+      {
+        name: "photos_for_slider",
+        path: "photos/slider",
+        component: PhotoSliderPage
+      }
     ],
     meta: {
       requiresAuth: true

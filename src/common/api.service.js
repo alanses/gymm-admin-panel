@@ -55,6 +55,9 @@ export default ApiService;
 export const AutificationService = {
   login(resource, params) {
     return ApiService.post(resource, params);
+  },
+  logout() {
+    return ApiService.post('logout');
   }
 };
 

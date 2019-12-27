@@ -21,6 +21,7 @@
                         </div>
                         <div class="md-layout-item md-small-size-100 md-size-100">
                             <div class="google-map">
+                                <label class="map-label">Address</label>
                                 <md-field>
                                     <AutocompleteGoogleMap
                                             ref="google-address"
@@ -43,13 +44,13 @@
                         </div>
                         <div class="md-layout-item md-small-size-100 md-size-50">
                             <md-field>
-                                <label>Available From</label>
+                                <label class="time-label">Available From</label>
                                 <vue-timepicker format="HH:mm" v-model="gym.available_from"></vue-timepicker>
                             </md-field>
                         </div>
                         <div class="md-layout-item md-small-size-100 md-size-50">
                             <md-field>
-                                <label>Available to</label>
+                                <label class="time-label">Available to</label>
                                 <vue-timepicker format="HH:mm" v-model="gym.available_to"></vue-timepicker>
                             </md-field>
                         </div>
@@ -197,5 +198,22 @@
         width: 100%;
         height: 50px;
         border: none;
+    }
+
+    .time-label {
+        top: 0;
+        font-size: 11px;
+    }
+
+    .map-label {
+        top: 0;
+        font-size: 11px;
+        position: absolute;
+        left: 0;
+        color: #AAAAAA !important;
+    }
+
+    .google-map {
+        position: relative;
     }
 </style>
