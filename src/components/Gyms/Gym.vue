@@ -54,7 +54,7 @@
                                 <vue-timepicker format="HH:mm" v-model="gym.available_to"></vue-timepicker>
                             </md-field>
                         </div>
-                        <div class="md-layout-item md-small-size-100 md-size-100">
+                        <div class="md-layout-item md-small-size-100 md-size-50">
                             <md-field>
                                 <label>City</label>
                                 <md-select v-model="gym.city_id" :required="checkIfCityChecked()">
@@ -63,6 +63,24 @@
                                             :value="city.id"
                                     >{{city.displayed_name}}</md-option>
                                 </md-select>
+                            </md-field>
+                        </div>
+                        <div class="md-layout-item md-small-size-100 md-size-50">
+                            <md-field>
+                                <label>Public Email</label>
+                                <md-input v-model="gym.public_email" type="text"></md-input>
+                            </md-field>
+                        </div>
+                        <div class="md-layout-item md-small-size-100 md-size-50">
+                            <md-field>
+                                <label>Phone</label>
+                                <md-input v-model="gym.phone" type="text"></md-input>
+                            </md-field>
+                        </div>
+                        <div class="md-layout-item md-small-size-100 md-size-50">
+                            <md-field>
+                                <label>Web site</label>
+                                <md-input v-model="gym.web_site" type="text"></md-input>
                             </md-field>
                         </div>
                     </div>
@@ -98,7 +116,10 @@
                     'description': null,
                     'available_from': '',
                     'available_to': '',
-                    'city_id': null
+                    'city_id': null,
+                    'web_site': null,
+                    'phone': null,
+                    'public_email': null
                 },
                 search: null,
                 list_cities: null
@@ -152,7 +173,10 @@
                   'description': this.gym.description,
                   'available_from': this.gym.available_from,
                   'available_to': this.gym.available_to,
-                  'city_id': this.gym.city_id
+                  'city_id': this.gym.city_id,
+                  'web_site': this.gym.web_site,
+                  'phone': this.gym.phone,
+                  'public_email': this.gym.public_email
                 };
             },
 
