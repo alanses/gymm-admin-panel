@@ -168,3 +168,12 @@ export const AchievementsService = {
     return ApiService.get('admin/list/activities/for/select');
   }
 };
+
+export const SliderPhotosService = {
+  createSliderPhotos(params) {
+    return ApiService.post('admin/slider/images', params);
+  },
+  getSliderImages() {
+    return ApiService.get('admin/list/images');
+  }
+};

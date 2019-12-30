@@ -28,6 +28,10 @@
                 <i class="material-icons">emoji_events</i>
                 <p>Achievement</p>
             </sidebar-link>
+            <sidebar-link to="/photos/slider">
+                <i class="material-icons">account_box</i>
+                <p>Photos for slider</p>
+            </sidebar-link>
 
           <li class="md-list-item" @click="logout">
             <a class="md-list-item-router md-list-item-container md-button-clean">
