@@ -29,11 +29,13 @@ jobs:
           name: pull changes to server
           command: sshpass -p $PASSWORD
                    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $LOGIN@$IP -p $PORT
-                   'cd /home/gymm/web/admin-gym.redentu.com/public_html
+                   'cd /home/gymm/web/admin-gym.redentu.com/public_html/source
                     && git reset --hard
                     && git pull origin master
                     && npm install
                     && npm run build
+                    && rm -rf ../public
+                    && mv dist/* ../public
                     && echo pull changes finish'
 workflows:
   version: 2
