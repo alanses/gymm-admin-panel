@@ -175,5 +175,11 @@ export const SliderPhotosService = {
   },
   getSliderImages() {
     return ApiService.get('admin/list/images');
+  },
+  getImageForSlider(id) {
+    return ApiService.getByParam('admin/slider/image', id);
+  },
+  updateImage(params) {
+    return ApiService.post('admin/update/photo/slider', params);
   }
 };

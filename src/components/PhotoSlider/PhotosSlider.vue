@@ -29,7 +29,7 @@
         methods: {
             viewPhoto(id) {
                 this.$router.push({
-                    path: `/gyms/${userId}`
+                    path: `/slider/photo/${id}`
                 });
             },
         }

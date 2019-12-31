@@ -89,7 +89,7 @@
                 }).catch((error) => {
                     if(error.response) {
                         let listMessages = ValidationService.getListErrors(error.response.data.errors);
-                        this.showMessageWithSuccessPhotosForSlider(listMessages);
+                        this.showMessageWithErrorPhotosForSlider(listMessages);
                     }
                 });
             },

@@ -26,6 +26,7 @@ import AchievementsPage from "../views/AchievementsPage";
 import AchievementPage from "../views/AchievementPage";
 import PhotoSliderPage from "../views/PhotoSliderPage";
 import CreatePhotosSliderPage from "../views/CreatePhotosSliderPage";
+import PhotoForSliderPage from "../views/PhotoForSliderPage";
 
 const routes = [
   {
@@ -157,11 +158,11 @@ const routes = [
         path: "create/photos/slider",
         component: CreatePhotosSliderPage,
       },
-      // {
-      //   name: "slider_photo",
-      //   path: "slider/photo/:id",
-      //   component: Slider
-      // }
+      {
+        name: "slider_photo",
+        path: "slider/photo/:id",
+        component: PhotoForSliderPage
+      }
     ],
     meta: {
       requiresAuth: true
